@@ -21,6 +21,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"sync"
 
@@ -122,7 +123,7 @@ func (ch *channel) recv() (messageHeader, []byte, error) {
 	if err != nil {
 		return messageHeader{}, nil, err
 	}
-
+	log.Printf("max: %d, mh.length: %d", messageLengthMax, mh.Length)
 	if mh.Length > uint32(messageLengthMax) {
 		if _, err := ch.br.Discard(int(mh.Length)); err != nil {
 			return mh, nil, fmt.Errorf("failed to discard after receiving oversized message: %w", err)
