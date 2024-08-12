@@ -30,7 +30,7 @@ import (
 
 const (
 	messageHeaderLength = 10
-	messageLengthMax    = 4 << 20
+	messageLengthMax    = 4 << 30
 )
 
 type messageType uint8
